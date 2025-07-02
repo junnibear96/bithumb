@@ -1,9 +1,36 @@
 import requests
 import pymysql
 import time
+import os
+from dotenv import load_dotenv
+import json
 
 def dbconnect() : 
-    conn = pymysql.connect (host='localhost', port=3306, user ='root',password='Tnnmjni47e$',db='trade_coin',charset='utf8')
+    load_dotenv()  # Loads the .env file
+
+    dbuser = os.getenv('dbuser')
+    dbpassword = os.getenv('dbpassword')
+
+    # Print to confirm
+    print(f"dbuser: {dbuser}")
+    print(f"dbpassword: {dbpassword}")
+
+    # Safe connection block
+    conn = None
+
+    try:
+        conn = pymysql.connect(
+            host='localhost',
+            port=3306,
+            user=dbuser,
+            password=dbpassword,
+            db='trade_coin',
+            charset='utf8'
+        )
+        print("Connection successful")
+
+    except Exception as e:
+        print(f"Error connecting to database: {e}")
     return conn 
 
 def insertFetch(data):
@@ -57,10 +84,10 @@ if response.status_code == 200:
 
 i = 0
 while i < len(coinList):
-    coin = coinList[i]
-    if(i > 49):
+    coin = coinList[i] #혹시 몰라서 60개씩 10초씩 쉬면서 가져오기
+    if(i % 60 == 0): # Bithumb Quota Limit: Public API 150 requests per second
         print(f"Fetching ticker data for market: {coin['market']}")
-        time.sleep(60)  # Wait for 60 second before the next request
+        time.sleep(10)  # Wait for 10 second before the next request 
     url = f"https://api.bithumb.com/v1/ticker?markets={coin['market']}"
 
     headers = {"accept": "application/json"}
