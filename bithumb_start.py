@@ -6,13 +6,8 @@ headers = {"accept": "application/json"}
 
 response = requests.get(url, headers=headers)
 
-print(response.text)
+if response.status_code == 200:
+    coinList = response.json()
+    print("Market data retrieved successfully:")
 
-
-url = "https://api.bithumb.com/v1/candles/months?count=1"
-
-headers = {"accept": "application/json"}
-
-response = requests.get(url, headers=headers)
-
-print(response.text)
+    print(coinList)
