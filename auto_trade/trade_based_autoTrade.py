@@ -3,13 +3,17 @@
 # 출처2: "https://github.com/sharebook-kr/pybithumb"
 import requests, time, datetime, jwt, uuid, pybithumb
 import pandas as pd
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 ####################################################################################################
 ############################## 전일 오후 11시 전체 24시간 거래대금 순위 불러오기 ##############################
 ####################################################################################################
 # ==================== 수정할 부분 ====================
 ## 엑셀 파일 저장 및 불러올 경로 지정
-save_path = 'C:/Users/2101A00085/PycharmProjects/pythonProject/bithumb_trade_price/'
+save_path = 'C:/Users/junse/.m2/bithumbRepository/bithumb/'
 # ==================================================
 
 ## rank: 순위, market: 종목 구분 코드, acc_trade_price_24h: 24시간 누적 거래대금
@@ -104,8 +108,8 @@ if volume_rising_stocks is not None:
     ######################################################################
     # ==================== 수정할 부분 ====================
     # 업비트에서 발급 받았던 본인의 access_key와 secret_key 입력!!!
-    A_key = 'ABCDEFGGIJKLMNOPQRSTUVWXYZ1234567890abcd'  # 본인 access_key 키로 변경
-    S_key = 'abcdefghijklmnopqrstuvwxyz1234567890ABCD'  # 본인 secret_key 키로 변경
+    A_key = os.getenv('accessKey')  # 본인 access_key 키로 변경
+    S_key = os.getenv('secretKey')  # 본인 secret_key 키로 변경
     # ==================================================
 
     ################################################################################
