@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-accessKey = os.getenv('accessKey')
-secretKey = os.getenv('secretKey')
+accessKey = os.getenv('accessKeyBuy')
+secretKey = os.getenv('secretKeyBuy')
 
 # Set API parameters
 accessKey = accessKey
