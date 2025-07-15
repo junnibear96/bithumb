@@ -108,8 +108,8 @@ if volume_rising_stocks is not None:
     ######################################################################
     # ==================== 수정할 부분 ====================
     # 업비트에서 발급 받았던 본인의 access_key와 secret_key 입력!!!
-    A_key = os.getenv('accessKey')  # 본인 access_key 키로 변경
-    S_key = os.getenv('secretKey')  # 본인 secret_key 키로 변경
+    A_key = os.getenv('accessKeyBuy')  # 본인 access_key 키로 변경
+    S_key = os.getenv('secretKeyBuy')  # 본인 secret_key 키로 변경
     # ==================================================
 
     ################################################################################
